@@ -45,47 +45,47 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/inventory': RouteRecordInfo<
+      '/inventory',
+      '/inventory',
+      Record<never, never>,
+      Record<never, never>,
+      | '/inventory/'
+      | '/inventory/members'
+      | '/inventory/notifications'
+      | '/inventory/security'
+    >,
+    '/inventory/': RouteRecordInfo<
+      '/inventory/',
+      '/inventory',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/inventory/members': RouteRecordInfo<
+      '/inventory/members',
+      '/inventory/members',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/inventory/notifications': RouteRecordInfo<
+      '/inventory/notifications',
+      '/inventory/notifications',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/inventory/security': RouteRecordInfo<
+      '/inventory/security',
+      '/inventory/security',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/orders': RouteRecordInfo<
       '/orders',
       '/orders',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/settings': RouteRecordInfo<
-      '/settings',
-      '/settings',
-      Record<never, never>,
-      Record<never, never>,
-      | '/settings/'
-      | '/settings/members'
-      | '/settings/notifications'
-      | '/settings/security'
-    >,
-    '/settings/': RouteRecordInfo<
-      '/settings/',
-      '/settings',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/settings/members': RouteRecordInfo<
-      '/settings/members',
-      '/settings/members',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/settings/notifications': RouteRecordInfo<
-      '/settings/notifications',
-      '/settings/notifications',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/settings/security': RouteRecordInfo<
-      '/settings/security',
-      '/settings/security',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -119,53 +119,53 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'src/pages/orders.vue': {
+    'src/pages/inventory.vue': {
       routes:
-        | '/orders'
-      views:
-        | never
-      pathParamNames:
-        | never
-    }
-    'src/pages/settings.vue': {
-      routes:
-        | '/settings'
-        | '/settings/'
-        | '/settings/members'
-        | '/settings/notifications'
-        | '/settings/security'
+        | '/inventory'
+        | '/inventory/'
+        | '/inventory/members'
+        | '/inventory/notifications'
+        | '/inventory/security'
       views:
         | 'default'
       pathParamNames:
         | never
     }
-    'src/pages/settings/index.vue': {
+    'src/pages/inventory/index.vue': {
       routes:
-        | '/settings/'
+        | '/inventory/'
       views:
         | never
       pathParamNames:
         | never
     }
-    'src/pages/settings/members.vue': {
+    'src/pages/inventory/members.vue': {
       routes:
-        | '/settings/members'
+        | '/inventory/members'
       views:
         | never
       pathParamNames:
         | never
     }
-    'src/pages/settings/notifications.vue': {
+    'src/pages/inventory/notifications.vue': {
       routes:
-        | '/settings/notifications'
+        | '/inventory/notifications'
       views:
         | never
       pathParamNames:
         | never
     }
-    'src/pages/settings/security.vue': {
+    'src/pages/inventory/security.vue': {
       routes:
-        | '/settings/security'
+        | '/inventory/security'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/orders.vue': {
+      routes:
+        | '/orders'
       views:
         | never
       pathParamNames:

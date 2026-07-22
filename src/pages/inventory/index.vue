@@ -2,6 +2,7 @@
 import * as z from 'zod'
 import { reactive, ref } from 'vue'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { useSileo } from '../../composables/useSileo'
 
 const fileRef = ref<HTMLInputElement>()
 
@@ -22,13 +23,11 @@ const profile = reactive<Partial<ProfileSchema>>({
   avatar: undefined,
   bio: undefined
 })
-const toast = useToast()
+const sileo = useSileo()
 async function onSubmit(event: FormSubmitEvent<ProfileSchema>) {
-  toast.add({
+  sileo.success({
     title: 'Success',
-    description: 'Your settings have been updated.',
-    icon: 'i-lucide-check',
-    color: 'success'
+    description: 'Your settings have been updated.'
   })
   console.log(event.data)
 }

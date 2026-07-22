@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { format } from 'date-fns'
 import type { Mail } from '../../types'
+import { useSileo } from '../../composables/useSileo'
 
 defineProps<{
   mail: Mail
@@ -23,7 +24,7 @@ const dropdownItems = [[{
   icon: 'i-lucide-circle-pause'
 }]]
 
-const toast = useToast()
+const sileo = useSileo()
 
 const reply = ref('')
 const loading = ref(false)
@@ -34,11 +35,9 @@ function onSubmit() {
   setTimeout(() => {
     reply.value = ''
 
-    toast.add({
+    sileo.success({
       title: 'Email sent',
-      description: 'Your email has been sent successfully',
-      icon: 'i-lucide-check-circle',
-      color: 'success'
+      description: 'Your email has been sent successfully'
     })
 
     loading.value = false

@@ -5,14 +5,16 @@ import type { TableColumn } from '@nuxt/ui'
 import { useFetch } from '@vueuse/core'
 import { getPaginationRowModel, type Row } from '@tanstack/table-core'
 import type { User } from '../types'
+import { useSileo } from '../composables/useSileo'
 
+const UInput = resolveComponent('UInput')
 const UAvatar = resolveComponent('UAvatar')
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 const UCheckbox = resolveComponent('UCheckbox')
 
-const toast = useToast()
+const sileo = useSileo()
 const table = useTemplateRef('table')
 
 const columnFilters = ref([{
@@ -35,7 +37,7 @@ function getRowItems(row: Row<User>) {
       icon: 'i-lucide-copy',
       onSelect() {
         navigator.clipboard.writeText(row.original.id.toString())
-        toast.add({
+        sileo.success({
           title: 'Copied to clipboard',
           description: 'Customer ID copied to clipboard'
         })
@@ -60,7 +62,7 @@ function getRowItems(row: Row<User>) {
       icon: 'i-lucide-trash',
       color: 'error',
       onSelect() {
-        toast.add({
+        sileo.success({
           title: 'Customer deleted',
           description: 'The customer has been deleted.'
         })

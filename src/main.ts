@@ -1,4 +1,5 @@
 import './assets/css/main.css'
+import 'vue-sileo/styles.css'
 
 import { createApp } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'

@@ -2,6 +2,7 @@
 import { ref, reactive } from 'vue'
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { useSileo } from '../../composables/useSileo'
 
 const schema = z.object({
   name: z.string().min(2, 'Too short'),
@@ -16,9 +17,12 @@ const state = reactive<Partial<Schema>>({
   email: ''
 })
 
-const toast = useToast()
+const sileo = useSileo()
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  toast.add({ title: 'Success', description: `New customer ${event.data.name} added`, color: 'success' })
+  sileo.success({
+    title: 'Success',
+    description: `New customer ${event.data.name} added`
+  })
   open.value = false
 }
 </script>

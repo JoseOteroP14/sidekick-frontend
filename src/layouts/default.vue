@@ -3,8 +3,9 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStorage } from '@vueuse/core'
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { useSileo } from '../composables/useSileo'
 
-const toast = useToast()
+const sileo = useSileo()
 const route = useRoute()
 
 const open = ref(false)
@@ -18,7 +19,7 @@ const links = [[{
   }
 }, {
   label: 'Orders',
-  icon: 'i-lucide-inbox',
+  icon: 'i-lucide-shopping-cart',
   to: '/orders',
   badge: '4',
   onSelect: () => {
@@ -26,7 +27,7 @@ const links = [[{
   }
 }, {
   label: 'Customers',
-  icon: 'i-lucide-shopping-cart',
+  icon: 'i-lucide-users',
   to: '/customers',
   onSelect: () => {
     open.value = false
@@ -38,27 +39,27 @@ const links = [[{
   defaultOpen: true,
   type: 'trigger',
   children: [{
-    label: 'Products',
-    to: '/inventory/products',
+    label: 'General',
+    to: '/inventory',
     exact: true,
     onSelect: () => {
       open.value = false
     }
   }, {
-    label: 'Variants',
-    to: '/inventory/variants',
+    label: 'Members',
+    to: '/inventory/members',
     onSelect: () => {
       open.value = false
     }
   }, {
-    label: 'Categories',
-    to: '/inventory/categories',
+    label: 'Notifications',
+    to: '/inventory/notifications',
     onSelect: () => {
       open.value = false
     }
   }, {
-    label: 'Suppliers',
-    to: '/inventory/suppliers',
+    label: 'Security',
+    to: '/inventory/security',
     onSelect: () => {
       open.value = false
     }
@@ -93,22 +94,16 @@ const groups = computed(() => [{
 
 const cookie = useStorage('cookie-consent', 'pending')
 if (cookie.value !== 'accepted') {
-  toast.add({
-    title: 'We use first-party cookies to enhance your experience on our website.',
-    duration: 0,
-    close: false,
-    actions: [{
-      label: 'Accept',
-      color: 'neutral',
-      variant: 'outline',
+  sileo.action({
+    title: 'Cookie consent',
+    description: 'We use first-party cookies to enhance your experience on our website.',
+    duration: null,
+    button: {
+      title: 'Accept',
       onClick: () => {
         cookie.value = 'accepted'
       }
-    }, {
-      label: 'Opt out',
-      color: 'neutral',
-      variant: 'ghost'
-    }]
+    }
   })
 }
 </script>
