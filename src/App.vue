@@ -15,10 +15,20 @@ const sileoTheme = computed(() => {
 
 const sileoOptions = computed<Partial<SileoOptions>>(() => {
   if (colorMode.value === 'dark') {
-    return { closable: false }
+    // Dark page: white toast with dark text
+    return {
+      closable: false,
+      fill: '#FFFFFF',
+      styles: {
+        title: 'text-zinc-900!',
+        description: 'text-zinc-600!',
+        badge: 'bg-zinc-900/5!',
+        button: 'bg-zinc-900/5! hover:bg-zinc-900/10!'
+      }
+    }
   }
 
-  // Light mode: black toast with light text
+  // Light page: black toast with light text
   return {
     closable: false,
     fill: '#171717',

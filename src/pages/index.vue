@@ -4,7 +4,10 @@ import { sub } from 'date-fns'
 import type { DropdownMenuItem } from '@nuxt/ui'
 import { useDashboard } from '../composables/useDashboard'
 import { useSileo } from '../composables/useSileo'
+import type { SileoOptions } from '../composables/useSileo'
 import type { Period, Range } from '../types'
+
+type SileoToastOptions = SileoOptions & { id?: string }
 
 const { isNotificationsSlideoverOpen } = useDashboard()
 const sileo = useSileo()
@@ -24,21 +27,42 @@ const range = shallowRef<Range>({
   end: new Date()
 })
 const period = ref<Period>('daily')
+const dashboardToastId = 'home-dashboard-load'
+
+const successStyles = {
+  title: 'text-[#38ba2f]!',
+  badge: 'text-[#38ba2f]! bg-[#38ba2f]/15!',
+  button: 'text-[#38ba2f]! bg-[#38ba2f]/15! hover:bg-[#38ba2f]/25!'
+}
 
 onMounted(() => {
   sileo.promise(
     new Promise<{ ready: boolean }>((resolve) => {
-      setTimeout(() => resolve({ ready: true }), 1800)
+      setTimeout(() => resolve({ ready: true }), 3800)
     }),
     {
       position: 'top-center',
       loading: {
-        title: 'Loading dashboard…',
-        description: 'Fetching your latest metrics.'
-      },
+        id: dashboardToastId,
+        title: 'Loading dashboard…'
+      } satisfies SileoToastOptions as SileoOptions,
       success: (data) => ({
         title: 'Dashboard ready',
-        description: data.ready ? 'Your data is up to date.' : 'Loaded.'
+        description: data.ready ? '' : 'Loaded.',
+        button: {
+          title: 'Refresh',
+          onClick: () => {
+            sileo.success({
+              id: dashboardToastId,
+              title: 'Dashboard refreshed',
+              styles: {
+                title: successStyles.title,
+                badge: successStyles.badge
+              }
+            } satisfies SileoToastOptions as SileoOptions)
+          }
+        },
+        styles: successStyles
       }),
       error: {
         title: 'Failed to load',
